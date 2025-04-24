@@ -9,16 +9,18 @@
 # To disable auto-updates set below provided constant to false
 
 readonly AURORA_AUTO_UPDATES=true                   # Enable automatic updates
-readonly AURORA_AUTO_UPDATES_INTERVAL=48            # Interval used for automatic updates (in hours)
 readonly AURORA_LOGIN=true                          # Enable compositor selection screen 
 readonly AURORA_TMUX=true                           # Enable automatic tmux sessions
 readonly AURORA_SERVICE=true                        # Enable services like low battery warning (needs AURORA_LOGIN to be enabled)
-readonly AURORA_SERVICE_INTERVAL=120                # Interval user for running watchdogs (in seconds)
+
+readonly AURORA_AUTO_UPDATES_INTERVAL=48            # Interval used for automatic updates (in hours)
+readonly AURORA_AUTO_UPDATE_URL="https://raw.githubusercontent.com/hlasitahudbabezzvuku/aurora/refs/heads/development/bashrc"
 
 readonly AURORA_CMD_REBOOT="systemctl reboot"       # Command used for rebooting the system
 readonly AURORA_CMD_POWEROFF="systemctl poweroff"   # Command used for powering off the system
 readonly AURORA_CMD_HIBERNATE="systemctl hibernate" # Command used for hibernating the system
 
+readonly AURORA_SERVICE_INTERVAL=120                # Interval user for running watchdogs (in seconds)
 readonly AURORA_SERVICE_BAT_WARNING=20              # Battery level treshold for warning notification
 readonly AURORA_SERVICE_BAT_CRITICAL=10             # Battery level treshold for critical notification
 readonly AURORA_SERVICE_BAT_HIBERNATE=5             # Battery level treshold for hibernaating the system
@@ -66,6 +68,15 @@ for i in "${software_required[@]}"; do
 done
 
 unset software_required
+
+
+###############
+### Updates ###
+###############
+
+if "${AURORA_AUTO_UPDATES}" && [[ -z ${_aurora_first_login+x} ]] && type curl &> /dev/null && [[ $( date +%s --reference "${HOME}"/.nevim.txt ) -lt $(( $( date +%s ) - ( AURORA_AUTO_UPDATES_INTERVAL * 60 * 60 ) )) ]]; then
+    ( output=$( curl --silent --fail "${AURORA_AUTO_UPDATE_URL}" ) && bash -n <<< "${output}" &> /dev/null && printf "%s" "${output}" > "${HOME}"/.bashrc & )
+fi
 
 
 #############
