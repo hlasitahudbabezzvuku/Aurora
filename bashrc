@@ -97,8 +97,8 @@ if ${AURORA_LOGIN} && [[ $( tty ) == /dev/tty* ]] && [[ -z ${_aurora_first_login
         ["niri"]="niri --session"
         ["Qtile"]="qtile start -b wayland"
         ["River"]="river"
-        ["Sway"]="sway"
-        ["SwayFX"]="swayfx"
+        ["Sway"]="sway --unsupported-gpu"
+        ["SwayFX"]="swayfx --unsupported-gpu"
         ["Wayfire"]="wayfire"
         ["Weston"]="weston"
     )

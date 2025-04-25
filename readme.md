@@ -52,8 +52,8 @@ Meet Aurora – your new `.bashrc`, reimagined! It's a powerful, multi-functiona
 | niri | $ niri --session |
 | Qtile | $ qtile start -b wayland |
 | River | $ river |
-| Sway | $ sway |
-| SwayFX | $ swayfx |
+| Sway | $ sway --unsupported-gpu |
+| SwayFX | $ swayfx --unsupported-gpu |
 | Wayfire | $ wayfire |
 | Weston | $ weston |
 
