@@ -39,6 +39,24 @@ Meet Aurora – your new `.bashrc`, reimagined! It's a powerful, multi-functiona
     - `curl`: Required for the Automatic Updates feature.
 - **OS Compatibility**: Designed from the ground up to be distribution and init-system agnostic. Runs beautifully on Linux, macOS, FreeBSD/OpenBSD, and Solaris.
 
+#### Supported Composiitors:
+| Conpositor | Command |
+| -------- | ------- |
+| Cage | $ cage |
+| DWL | $ dwl |
+| Steamdeck Mode | $ gamescope -e -- steam -tenfoot |
+| Hyprland | $ Hyprland |
+| KWin | $ kwin_wayland |
+| LabWC | $ labwc |
+| Miracle | $ miracle-wm |
+| niri | $ niri --session |
+| Qtile | $ qtile start -b wayland |
+| River | $ river |
+| Sway | $ sway |
+| SwayFX | $ swayfx |
+| Wayfire | $ wayfire |
+| Weston | $ weston |
+
 #### Join the Community:
 - **Contribute**: Got ideas or code improvements? Open an [pull request](https://github.com/hlasitahudbabezzvuku/aurora/pulls).
 - **Report Bugs**: Found a bug? Open an [issue](https://github.com/hlasitahudbabezzvuku/aurora/issues).
