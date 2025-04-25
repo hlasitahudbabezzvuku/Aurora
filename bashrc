@@ -74,7 +74,7 @@ unset software_required
 ### Updates ###
 ###############
 
-if "${AURORA_AUTO_UPDATES}" && [[ -z ${_aurora_first_login+x} ]] && type curl &> /dev/null && [[ $( date +%s --reference "${HOME}"/.nevim.txt ) -lt $(( $( date +%s ) - ( AURORA_AUTO_UPDATES_INTERVAL * 60 * 60 ) )) ]]; then
+if "${AURORA_AUTO_UPDATES}" && [[ -z ${_aurora_first_login+x} ]] && type curl &> /dev/null && [[ $( date +%s --reference "${HOME}"/.bashrc ) -lt $(( $( date +%s ) - ( AURORA_AUTO_UPDATES_INTERVAL * 60 * 60 ) )) ]]; then
     ( output=$( curl --silent --fail "${AURORA_AUTO_UPDATE_URL}" ) && bash -n <<< "${output}" &> /dev/null && printf "%s" "${output}" > "${HOME}"/.bashrc & )
 fi
 
