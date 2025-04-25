@@ -12,7 +12,7 @@ Meet Aurora – your new `.bashrc`, reimagined! It's a powerful, multi-functiona
 
 #### Key Features:
 - **Smart Defaults**: Start with a rock-solid `.bashrc` foundation, including essential `PATH` settings and smart defaults.
-- **Wayland Launching**: Log in via TTY, and Aurora instantly finds your installed Wayland compositors, letting you pick and launch your graphical session with a single keypress.
+- **Wayland Launching**: Log in via TTY, and Aurora instantly finds your installed [Wayland compositors](https://github.com/hlasitahudbabezzvuku/aurora?tab=readme-ov-file#supported-composiitors), letting you pick and launch your graphical session with a single keypress.
 - **Tmux Integration**: Never lose your place again! Aurora intelligently manages `tmux` sessions within your graphical environment. It automatically reconnects you to existing sessions or creates fresh ones, bringing incredible persistence and powerful features (tabs, splits!) even to terminals that lack them natively.
 - **Services**: A mechanism to launch and manage simple background tasks (like battery monitors) alongside your compositor session.
 - **Customization**: Easily extend and customize your Bash environment! Simply drop your configuration `.sh` files into `~/.config/bash/`. Aurora automatically sources them in alphabetical order (use `10_`, `50_` prefixes), making customization clean and manageable.
