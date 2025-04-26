@@ -39,7 +39,7 @@ Meet Aurora – your new `.bashrc`, reimagined! It's a powerful, multi-functiona
     - `curl`: Required for the Automatic Updates feature.
 - **OS Compatibility**: Designed from the ground up to be distribution and init-system agnostic. Runs beautifully on Linux, macOS, FreeBSD/OpenBSD, and Solaris.
 
-### Supported Composiitors:
+### Supported Compositors:
 | Conpositor | Command |
 | -------- | ------- |
 | Cage | $ cage |
