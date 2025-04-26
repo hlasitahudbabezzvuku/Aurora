@@ -10,7 +10,7 @@
 
 Meet Aurora – your new `.bashrc`, reimagined! It's a powerful, multi-functional utility built to supercharge your command-line environment. Automated compositor launching, intelligent terminal session management, and effortless customization, all within a lightweight, cross-platform package designed for power users and tinkerers alike.
 
-#### Key Features:
+### Key Features:
 - **Smart Defaults**: Start with a rock-solid `.bashrc` foundation, including essential `PATH` settings and smart defaults.
 - **Wayland Launching**: Log in via TTY, and Aurora instantly finds your installed [Wayland compositors](https://github.com/hlasitahudbabezzvuku/aurora?tab=readme-ov-file#supported-composiitors), letting you pick and launch your graphical session with a single keypress.
 - **Tmux Integration**: Never lose your place again! Aurora intelligently manages `tmux` sessions within your graphical environment. It automatically reconnects you to existing sessions or creates fresh ones, bringing incredible persistence and powerful features (tabs, splits!) even to terminals that lack them natively.
@@ -18,14 +18,14 @@ Meet Aurora – your new `.bashrc`, reimagined! It's a powerful, multi-functiona
 - **Customization**: Easily extend and customize your Bash environment! Simply drop your configuration `.sh` files into `~/.config/bash/`. Aurora automatically sources them in alphabetical order (use `10_`, `50_` prefixes), making customization clean and manageable.
 - **Automatic Updates**: Enable automatic updates (requires `curl`) and always have the latest Aurora features and improvements delivered straight to your system, effortlessly.
 
-#### Get Started in Seconds:
+### Get Started in Seconds:
 1.  **Download**: Grab the [bashrc](https://github.com/hlasitahudbabezzvuku/aurora/blob/development/bashrc) file or clone the repository.
 2.  **Backup**: Protect your current setup: `cp ~/.bashrc ~/.bashrc.bak`
 3.  **Install**: Replace your `~/.bashrc` with `bashrc` for the complete experience.
 4.  **Customize (Optional)**: Create `~/.config/bash/` and populate it with your personal scripts (e.g., `~/.config/bash/50_aliases.sh`, `~/.config/bash/90_exports.sh`).
 5.  **Activate**: Launch a new tty and log in.
 
-#### Platform Support & Dependencies:
+### Platform Support & Dependencies:
 - **Minimal Dependencies**:
   - **Core Dependencies**:
     - `bash`
@@ -39,7 +39,7 @@ Meet Aurora – your new `.bashrc`, reimagined! It's a powerful, multi-functiona
     - `curl`: Required for the Automatic Updates feature.
 - **OS Compatibility**: Designed from the ground up to be distribution and init-system agnostic. Runs beautifully on Linux, macOS, FreeBSD/OpenBSD, and Solaris.
 
-#### Supported Composiitors:
+### Supported Composiitors:
 | Conpositor | Command |
 | -------- | ------- |
 | Cage | $ cage |
@@ -57,9 +57,9 @@ Meet Aurora – your new `.bashrc`, reimagined! It's a powerful, multi-functiona
 | Wayfire | $ wayfire |
 | Weston | $ weston |
 
-#### Join the Community:
+### Join the Community:
 - **Contribute**: Got ideas or code improvements? Open an [pull request](https://github.com/hlasitahudbabezzvuku/aurora/pulls).
 - **Report Bugs**: Found a bug? Open an [issue](https://github.com/hlasitahudbabezzvuku/aurora/issues).
 
-#### License:
+### License:
 Aurora is released under the MIT licence. Check the [LICENSE](https://github.com/hlasitahudbabezzvuku/aurora/blob/development/LICENSE) file for the full details.
