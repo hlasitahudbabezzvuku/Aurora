@@ -46,7 +46,7 @@ Meet Aurora – your new `.bashrc`, reimagined! It's a powerful, multi-functiona
 | DWL | $ dwl |
 | Steamdeck Mode | $ gamescope -e -- steam -tenfoot |
 | Hyprland | $ Hyprland |
-| KWin | $ kwin_wayland |
+| Plasma | $ startplasma-wayland |
 | LabWC | $ labwc |
 | Miracle | $ miracle-wm |
 | niri | $ niri --session |
