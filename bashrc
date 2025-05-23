@@ -91,7 +91,7 @@ if ${AURORA_LOGIN} && [[ $( tty ) == /dev/tty* ]] && [[ -z ${_aurora_first_login
         ["DWL"]="dwl"
         ["Steamdeck Mode"]="gamescope -e -- steam -tenfoot"
         ["Hyprland"]="Hyprland"
-        ["KWin"]="kwin_wayland"
+        ["Plasma"]="startplasma-wayland"
         ["LabWC"]="labwc"
         ["Miracle"]="miracle-wm"
         ["niri"]="niri --session"
