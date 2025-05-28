@@ -93,7 +93,20 @@ if ${AURORA_BLESH}; then
     if [[ -f $HOME/.local/share/blesh/ble.sh ]]; then
         source "$HOME"/.local/share/blesh/ble.sh --noattach
     else
-        echo nevm
+        (
+            if [[ ! -d "$HOME/.local/share/aurora" ]]; then
+                mkdir -p "$HOME/.local/share/aurora"
+            fi
+
+            cd "$HOME/.local/share/aurora" || exit
+
+            git clone --recursive https://github.com/akinomyoga/ble.sh.git && \
+                cd ble.sh && \
+                make && \
+                make install
+
+            rm -rf "$HOME/.local/share/aurora/ble.sh"
+        )
     fi
 fi
 
