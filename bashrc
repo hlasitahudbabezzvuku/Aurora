@@ -11,6 +11,7 @@
 readonly AURORA_AUTO_UPDATES=true                   # Enable automatic updates
 readonly AURORA_LOGIN=true                          # Enable compositor selection screen 
 readonly AURORA_TMUX=true                           # Enable automatic tmux sessions
+readonly AURORA_THEME=true                          # Enable default theme
 readonly AURORA_SERVICE=true                        # Enable services like low battery warning (needs AURORA_LOGIN to be enabled)
 
 readonly AURORA_AUTO_UPDATES_INTERVAL=48            # Interval used for automatic updates (in hours)
@@ -211,6 +212,30 @@ if "${AURORA_TMUX}" && type tmux &> /dev/null && [[ -z "${TMUX+x}" ]]; then
 fi
 
 
+#############
+### Theme ###
+#############
+
+if ${AURORA_THEME}; then
+    PS1=""
+
+    PS1+="\n$( tput setaf 237 )┌─$( tput setab 235 && tput setaf 7 )  "
+    PS1+="$( tput setab 7 && tput setaf 235 && tput bold ) \h "
+    PS1+="\$( if [[ -n \${CONTAINER_ID+x} ]] &> /dev/null; then tput setab 2; printf \" \${CONTAINER_ID} \"; fi )"
+    PS1+="$( tput sgr0 && tput setab 235 && tput setaf 7 ) \t "
+    PS1+="$( tput setab 234 ) \$( jobs | wc -l ) "
+    PS1+="\$( if [[ -d .git/ ]] &> /dev/null; then tput setab 233; printf \"  \"; fi )"
+
+    PS1+="$( tput sgr0 )"
+    PS1+="\n$( tput setaf 237 )└─["
+    PS1+="$( tput setaf 7 )\$( pwd | sed -e \"s/\/home\/${USER}/ 󰮧/\" -e \"s/\// $( tput setaf 238 )  $( tput setaf 7 ) /g\" ) "
+    PS1+="$( tput setaf 237 )]"
+
+    PS1+="$( tput sgr0 )"
+    PS1+="\n  "
+fi
+
+
 ################
 ### Sourcing ###
 ################
@@ -226,5 +251,3 @@ if [ -d "${HOME}"/.config/bash ]; then
         fi
     done
 fi
-
-
