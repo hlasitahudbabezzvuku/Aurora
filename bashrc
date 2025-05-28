@@ -11,6 +11,7 @@
 readonly AURORA_AUTO_UPDATES=true                   # Enable automatic updates
 readonly AURORA_LOGIN=true                          # Enable compositor selection screen 
 readonly AURORA_TMUX=true                           # Enable automatic tmux sessions
+readonly AURORA_BLESH=true                          # Enable ble.sh integration
 readonly AURORA_THEME=true                          # Enable default theme
 readonly AURORA_SERVICE=true                        # Enable services like low battery warning (needs AURORA_LOGIN to be enabled)
 
@@ -77,6 +78,23 @@ unset software_required
 
 if "${AURORA_AUTO_UPDATES}" && [[ -z ${_aurora_first_login+x} ]] && type curl &> /dev/null && [[ $( date +%s --reference "${HOME}"/.bashrc ) -lt $(( $( date +%s ) - ( AURORA_AUTO_UPDATES_INTERVAL * 60 * 60 ) )) ]]; then
     ( output=$( curl --silent --fail "${AURORA_AUTO_UPDATE_URL}" ) && bash -n <<< "${output}" &> /dev/null && printf "%s" "${output}" > "${HOME}"/.bashrc & )
+
+    if ${AURORA_BLESH}; then
+        ( bash "$HOME"/.local/share/blesh/ble.sh --update )
+    fi
+fi
+
+
+##############
+### ble.sh ###
+##############
+
+if ${AURORA_BLESH}; then
+    if [[ -f $HOME/.local/share/blesh/ble.sh ]]; then
+        source "$HOME"/.local/share/blesh/ble.sh --noattach
+    else
+        echo nevm
+    fi
 fi
 
 
@@ -114,75 +132,75 @@ if ${AURORA_LOGIN} && [[ $( tty ) == /dev/tty* ]] && [[ -z ${_aurora_first_login
 
     height=${#software_avalible[@]} 
 
-    start_col=$(( $( tput cols ) / 2 - 15 ))
-    start_row=$(( $( tput lines ) / 2 - ( height + 12 ) / 2 ))
+        start_col=$(( $( tput cols ) / 2 - 15 ))
+        start_row=$(( $( tput lines ) / 2 - ( height + 12 ) / 2 ))
 
-    while true; do
-        tput reset
-
-        tput cup $start_row ${start_col}
-        printf "┌────── START SESSION ──────┐"
-
-        for i in "${!software_avalible[@]}"; do
-            tput cup $(( start_row + i + 2 )) ${start_col}
-            printf "   %i   %s" $(( i + 1 )) "${software_avalible[${i}]}"
-        done
-
-        tput cup $(( start_row + height + 3 )) ${start_col}
-        printf "└───────────────────────────┘"
-
-        tput cup $(( start_row + height + 4 )) ${start_col} 
-        printf "┌────── OTHER ACTIONS ──────┐"
-
-        tput cup $(( start_row + height + 6 )) ${start_col} && printf "   %c   %s" "q" "Exit"
-        tput cup $(( start_row + height + 7 )) ${start_col} && printf "   %c   %s" "s" "Shell (Full)"
-        tput cup $(( start_row + height + 8 )) ${start_col} && printf "   %c   %s" "a" "Shell (Minimal)"
-        tput cup $(( start_row + height + 9 )) ${start_col} && printf "   %c   %s" "r" "Reboot"
-        tput cup $(( start_row + height + 10 )) ${start_col} && printf "   %c   %s" "p" "Poweroff"
-
-        tput cup $(( start_row + height + 12 )) ${start_col}
-        printf "└───────────────────────────┘"
-
-        tput cup $(( start_row + height + 14 )) ${start_col}
-        read -p " > " -n 1 -r input
-
-        if [[ ${input} == "q" ]] || [[ ${input} == "e" ]]; then
-            break
-        elif [[ ${input} == "s" ]]; then
-            tput reset
-            bash
-        elif [[ ${input} == "a" ]]; then
-            tput reset
-            bash --norc --noprofile
-        elif [[ ${input} == "r" ]]; then
-            ${AURORA_CMD_REBOOT}
-        elif [[ ${input} == "p" ]]; then
-            ${AURORA_CMD_POWEROFF}
-        elif [[ ${input} -gt 0 ]] && [[ ${input} -le ${height} ]]; then
+        while true; do
             tput reset
 
-            ${software_all[${software_avalible[$(( input - 1 ))]}]} & pid_cmp=$!
+            tput cup $start_row ${start_col}
+            printf "┌────── START SESSION ──────┐"
 
-            while ${AURORA_SERVICE} && type notify-send; do
-                sleep ${AURORA_SERVICE_INTERVAL}
+            for i in "${!software_avalible[@]}"; do
+                tput cup $(( start_row + i + 2 )) ${start_col}
+                printf "   %i   %s" $(( i + 1 )) "${software_avalible[${i}]}"
+            done
 
-                capacity=$( < /sys/class/power_supply/BAT?/capacity )
-                status=$( < /sys/class/power_supply/BAT?/status )
-                if [[ ${status} != "Charging" ]] && [[ ${capacity} -le ${AURORA_SERVICE_BAT_HIBERNATE} ]]; then
-                    notify-send --app-name=aurora --urgency=critical "Critical Battery State" "System will hibernate in 20 seconds."
-                    sleep 20 && ${AURORA_CMD_HIBERNATE}
-                elif [[ ${status} != "Charging" ]] && [[ ${capacity} -le ${AURORA_SERVICE_BAT_CRITICAL} ]]; then
-                    notify-send --app-name=aurora --urgency=critical "Battery Capacity: ${capacity}" "Below critical operating level."
-                elif [[ ${status} != "Charging" ]] && [[ ${capacity} -le ${AURORA_SERVICE_BAT_WARNING} ]]; then
-                    notify-send --app-name=aurora --urgency=normal "Battery Capacity: ${capacity}" "Approaching low power threshold."
-                fi
+            tput cup $(( start_row + height + 3 )) ${start_col}
+            printf "└───────────────────────────┘"
 
-            done & pid_wdg=$!
+            tput cup $(( start_row + height + 4 )) ${start_col} 
+            printf "┌────── OTHER ACTIONS ──────┐"
 
-            wait ${pid_cmp} && if ${AURORA_SERVICE}; then kill ${pid_wdg}; fi
-        fi
-    done
-    exit
+            tput cup $(( start_row + height + 6 )) ${start_col} && printf "   %c   %s" "q" "Exit"
+            tput cup $(( start_row + height + 7 )) ${start_col} && printf "   %c   %s" "s" "Shell (Full)"
+            tput cup $(( start_row + height + 8 )) ${start_col} && printf "   %c   %s" "a" "Shell (Minimal)"
+            tput cup $(( start_row + height + 9 )) ${start_col} && printf "   %c   %s" "r" "Reboot"
+            tput cup $(( start_row + height + 10 )) ${start_col} && printf "   %c   %s" "p" "Poweroff"
+
+            tput cup $(( start_row + height + 12 )) ${start_col}
+            printf "└───────────────────────────┘"
+
+            tput cup $(( start_row + height + 14 )) ${start_col}
+            read -p " > " -n 1 -r input
+
+            if [[ ${input} == "q" ]] || [[ ${input} == "e" ]]; then
+                break
+            elif [[ ${input} == "s" ]]; then
+                tput reset
+                bash
+            elif [[ ${input} == "a" ]]; then
+                tput reset
+                bash --norc --noprofile
+            elif [[ ${input} == "r" ]]; then
+                ${AURORA_CMD_REBOOT}
+            elif [[ ${input} == "p" ]]; then
+                ${AURORA_CMD_POWEROFF}
+            elif [[ ${input} -gt 0 ]] && [[ ${input} -le ${height} ]]; then
+                tput reset
+
+                ${software_all[${software_avalible[$(( input - 1 ))]}]} & pid_cmp=$!
+
+                while ${AURORA_SERVICE} && type notify-send; do
+                    sleep ${AURORA_SERVICE_INTERVAL}
+
+                    capacity=$( < /sys/class/power_supply/BAT?/capacity )
+                    status=$( < /sys/class/power_supply/BAT?/status )
+                    if [[ ${status} != "Charging" ]] && [[ ${capacity} -le ${AURORA_SERVICE_BAT_HIBERNATE} ]]; then
+                        notify-send --app-name=aurora --urgency=critical "Critical Battery State" "System will hibernate in 20 seconds."
+                        sleep 20 && ${AURORA_CMD_HIBERNATE}
+                    elif [[ ${status} != "Charging" ]] && [[ ${capacity} -le ${AURORA_SERVICE_BAT_CRITICAL} ]]; then
+                        notify-send --app-name=aurora --urgency=critical "Battery Capacity: ${capacity}" "Below critical operating level."
+                    elif [[ ${status} != "Charging" ]] && [[ ${capacity} -le ${AURORA_SERVICE_BAT_WARNING} ]]; then
+                        notify-send --app-name=aurora --urgency=normal "Battery Capacity: ${capacity}" "Approaching low power threshold."
+                    fi
+
+                done & pid_wdg=$!
+
+                wait ${pid_cmp} && if ${AURORA_SERVICE}; then kill ${pid_wdg}; fi
+fi
+done
+exit
 fi
 
 
@@ -251,3 +269,13 @@ if [ -d "${HOME}"/.config/bash ]; then
         fi
     done
 fi
+
+
+##############
+### ble.sh ###
+##############
+
+if [[ -n ${BLE_VERSION+x} ]]; then
+    ble-attach
+fi
+
