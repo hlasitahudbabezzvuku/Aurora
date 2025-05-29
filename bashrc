@@ -12,8 +12,8 @@ readonly AURORA_AUTO_UPDATES=true                   # Enable automatic updates
 readonly AURORA_LOGIN=true                          # Enable compositor selection screen 
 readonly AURORA_TMUX=true                           # Enable automatic tmux sessions
 readonly AURORA_BLESH=true                          # Enable ble.sh integration
-readonly AURORA_THEME=true                          # Enable default theme
 readonly AURORA_SERVICE=true                        # Enable services like low battery warning (needs AURORA_LOGIN to be enabled)
+readonly AURORA_CONFIG=true                         # Enable default configuration
 
 readonly AURORA_AUTO_UPDATES_INTERVAL=48            # Interval used for automatic updates (in hours)
 readonly AURORA_AUTO_UPDATE_URL="https://raw.githubusercontent.com/hlasitahudbabezzvuku/aurora/refs/heads/development/bashrc"
@@ -243,11 +243,11 @@ if "${AURORA_TMUX}" && type tmux &> /dev/null && [[ -z "${TMUX+x}" ]]; then
 fi
 
 
-#############
-### Theme ###
-#############
+#####################
+### Configuration ###
+#####################
 
-if ${AURORA_THEME}; then
+if ${AURORA_CONFIG}; then
     PS1=""
 
     PS1+="\n$( tput setaf 237 )┌─$( tput setab 235 && tput setaf 7 )  "
@@ -264,6 +264,17 @@ if ${AURORA_THEME}; then
 
     PS1+="$( tput sgr0 )"
     PS1+="\n  "
+
+    alias ls="ls -h --color"
+    alias ll="ls -lv --group-directories-first"
+    alias la="ll -a"
+    alias lr="ll -R"
+
+    alias diff='diff --color=auto'
+    alias grep='grep --color=auto'
+    alias ip='ip -color=auto'
+
+    alias vi=nvim
 fi
 
 
