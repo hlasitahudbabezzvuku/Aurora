@@ -265,6 +265,9 @@ if ${AURORA_CONFIG}; then
     PS1+="$( tput sgr0 )"
     PS1+="\n  "
 
+    export HISTFILESIZE=8192
+    export PAGER=less
+
     alias ls="ls -h --color"
     alias ll="ls -lv --group-directories-first"
     alias la="ll -a"
@@ -274,7 +277,11 @@ if ${AURORA_CONFIG}; then
     alias grep='grep --color=auto'
     alias ip='ip -color=auto'
 
-    alias vi=nvim
+    if type nvim &> /dev/null; then
+        export EDITOR="nvim"
+        export VISUAL="nvim"
+        alias vi=nvim
+    fi
 fi
 
 
