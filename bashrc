@@ -262,7 +262,7 @@ if ${AURORA_CONFIG}; then
 
     PS1+="\n$( tput setaf 237 )┌─$( tput setab 235 && tput setaf 7 )  "
     PS1+="$( tput setab 7 && tput setaf 235 && tput bold ) \h "
-    PS1+="\$( if [[ -n \${CONTAINER_ID+x} ]] &> /dev/null; then tput setab 2; printf \" \${CONTAINER_ID} \"; fi )"
+    PS1+="\$( if [[ -n \${CONTAINER_ID+x} ]] &> /dev/null; then tput setab 6; printf \" \${CONTAINER_ID} \"; fi )"
     PS1+="$( tput sgr0 && tput setab 235 && tput setaf 7 ) \t "
     PS1+="$( tput setab 234 ) \$( jobs | wc -l ) "
     PS1+="\$( if [[ -d .git/ ]] &> /dev/null; then tput setab 233; printf \"  \"; fi )"
