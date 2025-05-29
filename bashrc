@@ -28,6 +28,16 @@ readonly AURORA_SERVICE_BAT_CRITICAL=10             # Battery level treshold for
 readonly AURORA_SERVICE_BAT_HIBERNATE=5             # Battery level treshold for hibernaating the system
 
 
+
+################
+### Sourcing ###
+################
+
+if [[ -f /etc/bashrc ]]; then
+    source /etc/bashrc
+fi
+
+
 ##################
 ### Enviroment ###
 ##################
@@ -243,9 +253,9 @@ if "${AURORA_TMUX}" && type tmux &> /dev/null && [[ -z "${TMUX+x}" ]]; then
 fi
 
 
-#####################
-### Configuration ###
-#####################
+######################
+### Default Config ###
+######################
 
 if ${AURORA_CONFIG}; then
     PS1=""
@@ -285,13 +295,9 @@ if ${AURORA_CONFIG}; then
 fi
 
 
-################
-### Sourcing ###
-################
-
-if [[ -f /etc/bashrc ]]; then
-    source /etc/bashrc
-fi
+###################
+### User Config ###
+###################
 
 if [ -d "${HOME}"/.config/bash ]; then
     for i in "${HOME}"/.config/bash/*.sh; do
