@@ -95,32 +95,6 @@ if "${AURORA_AUTO_UPDATES}" && [[ -z ${_aurora_first_login+x} ]] && type curl &>
 fi
 
 
-##############
-### ble.sh ###
-##############
-
-if ${AURORA_BLESH}; then
-    if [[ -f $HOME/.local/share/blesh/ble.sh ]]; then
-        source "$HOME"/.local/share/blesh/ble.sh --noattach
-    else
-        (
-            if [[ ! -d "$HOME/.local/share/aurora" ]]; then
-                mkdir -p "$HOME/.local/share/aurora"
-            fi
-
-            cd "$HOME/.local/share/aurora" || exit
-
-            git clone --recursive https://github.com/akinomyoga/ble.sh.git && \
-                cd ble.sh && \
-                make && \
-                make install
-
-            rm -rf "$HOME/.local/share/aurora/ble.sh"
-        )
-    fi
-fi
-
-
 #############
 ### Login ###
 #############
@@ -250,6 +224,32 @@ if "${AURORA_TMUX}" && type tmux &> /dev/null && [[ -z "${TMUX+x}" ]] && [[ -z "
 
     if type notify-send; then notify-send --app-name=aurora --urgency=critical "ERROR" "Could not find any free tmux session."; fi
     exec bash --norc --noprofile
+fi
+
+
+##############
+### ble.sh ###
+##############
+
+if ${AURORA_BLESH}; then
+    if [[ -f $HOME/.local/share/blesh/ble.sh ]]; then
+        source "$HOME"/.local/share/blesh/ble.sh --noattach
+    else
+        (
+            if [[ ! -d "$HOME/.local/share/aurora" ]]; then
+                mkdir -p "$HOME/.local/share/aurora"
+            fi
+
+            cd "$HOME/.local/share/aurora" || exit
+
+            git clone --recursive https://github.com/akinomyoga/ble.sh.git && \
+                cd ble.sh && \
+                make && \
+                make install
+
+            rm -rf "$HOME/.local/share/aurora/ble.sh"
+        )
+    fi
 fi
 
 
