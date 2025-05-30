@@ -216,7 +216,7 @@ if "${AURORA_TMUX}" && type tmux &> /dev/null && [[ -z "${TMUX+x}" ]] && [[ -z "
         fi
     done
 
-    for (( i = 0; i < 128; i++ )); do
+    for (( i = 0; i < 65536; i++ )); do
         if [[ ! "${sessions[*]/:*/}" =~ "${i}" ]]; then
             exec tmux new-session -s "${i}"
         fi
