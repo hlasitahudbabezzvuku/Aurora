@@ -233,7 +233,7 @@ fi
 
 if ${AURORA_BLESH}; then
     if [[ -f $HOME/.local/share/blesh/ble.sh ]]; then
-        source "$HOME"/.local/share/blesh/ble.sh --noattach
+        source "$HOME"/.local/share/blesh/ble.sh
     else
         (
             if [[ ! -d "$HOME/.local/share/aurora" ]]; then
@@ -306,13 +306,3 @@ if [ -d "${HOME}"/.config/bash ]; then
         fi
     done
 fi
-
-
-##############
-### ble.sh ###
-##############
-
-if [[ -n ${BLE_VERSION+x} ]]; then
-    ble-attach
-fi
-
