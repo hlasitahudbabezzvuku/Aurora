@@ -231,7 +231,7 @@ fi
 ### Tmux Session ###
 ####################
 
-if "${AURORA_TMUX}" && type tmux &> /dev/null && [[ -z "${TMUX+x}" ]]; then
+if "${AURORA_TMUX}" && type tmux &> /dev/null && [[ -z "${TMUX+x}" ]] && [[ -z "${SESSION+x}" ]]; then
     mapfile -t sessions < <( tmux list-sessions )
 
     for i in "${sessions[@]/:*/}"; do
