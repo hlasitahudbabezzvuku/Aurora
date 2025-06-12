@@ -50,6 +50,12 @@ if ! [[ "${PATH}" =~ "${HOME}/bin" ]]; then
     PATH="${HOME}/bin:${PATH}"
 fi
 
+for i in "$HOME"/.sdk/*/bin/; do
+    if ! [[ "${PATH}" =~ "${i}" ]]; then
+        PATH="${i}:${PATH}"
+    fi
+done
+
 export PATH
 
 
