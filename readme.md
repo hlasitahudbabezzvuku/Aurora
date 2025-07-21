@@ -1,3 +1,7 @@
+### <div align="center">⚠️ UNMAINTAINED ⚠️</div>
+<div align="center">Tools like uwsm can handle launching compositors much better than Aurora. For tmux integration use Belora.</div>
+<br><br><br>
+
 # <div align="center">Aurora</div>
 
 ### <div align="center">Supercharge your terminal and Wayland experience with Aurora framework.</div>
